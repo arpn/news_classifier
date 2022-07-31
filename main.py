@@ -39,10 +39,10 @@ class SentimentClassifier(LightningModule):
                 max_length=tokenizer.model_max_length)['input_ids']
             return x
 
-        self.train_dataset = load_dataset(FLAGS.dataset, split='train[:5%]').map(
+        self.train_dataset = load_dataset(FLAGS.dataset, split='train').map(
             tokenize, batched=True, remove_columns=['text', 'label'])
         self.train_dataset.set_format(type='torch')
-        self.test_dataset = load_dataset(FLAGS.dataset, split='test[:5%]').map(
+        self.test_dataset = load_dataset(FLAGS.dataset, split='test').map(
             tokenize, batched=True, remove_columns=['text', 'label'])
         self.test_dataset.set_format(type='torch')
 
